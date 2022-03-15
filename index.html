@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- style -->
+        <link rel="stylesheet" href="./style.css">
+        <title>Vue JS</title>
+    </head>
+    <body>
+        <!-- Déclarer une app -->
+        <div id="app">
+            <h1>Cours Vue JS</h1>
+
+            <hr>
+
+            <!-- Faire appel a de la data -->
+            <p>{{txt}}</p>
+
+            <!-- Faire appel a une fonction -->
+            <p>{{presentation('Matteo')}}</p>
+
+            <!-- Faire appel a un lien (v-bind:href || :href) -->
+            <a v-bind:href="url" target="_blank">mon site</a>
+            <!-- ** Raccourcis v-bind = :href ** -->
+
+            <h2>Compteur : {{compteur}}</h2>
+            <!-- Ajoutez un évenement a un élément (v-on:event) -->
+            <div class="buttons">
+                <button v-on:click='down'>-</button>
+                <button @click='up'>+</button>
+                <!-- ** Raccourcis v-on = @click ** -->
+            </div>
+
+            <canvas v-on:mousemove='coords'></canvas>
+            <p>Mouse position : {{x}} / {{y}}</p>
+
+            <hr>
+
+            <!-- LES EVENTS MODIFIERS -->
+            
+            <!-- .once = Lance la fonction 1 fois -->
+            <!-- .prevent = Empeche me rechargement de la page a l'envoie de formulaires -->
+            <!-- .stop = Empeche la propagation -->
+
+            <button v-on:click.stop='clickMe'>Click Me</button>
+            <button v-on:click.once='compteur++'>Once</button>
+            <form v-on:submit.prevent='onSubmit'>
+                <label for='name'>Name</label>
+                <input type='text' id='name' name='name' placeholder='Name' />
+                <button>Valider</button>
+            </form>
+
+            <hr>
+
+            <!-- LES KEY MODIFIERS -->
+
+            <!-- Les autres touches : https://fr.vuejs.org/v2/guide/events.html#Code-des-touches -->
+            
+            <!-- .enter = Quand entrée est presse -->
+            <label for='name'>Enter</label>
+            <input v-on:keyup.enter="keyUp" type='text' placeholder='Enter' />
+
+            <!-- Quand une touche est pressée -->
+            <label for='crediCard'>Carte de Crédit</label>
+            <input v-on:keyup="creditCardFunc" type='text' placeholder='credit Card' />
+
+            <!-- Passe en parametre ce que l'on écrit dans l'input -->
+            <input v-model="creditCard" type='text' placeholder='credit Card' />
+            <span>{{ creditCard }}</span>
+
+            <!-- Opération ternaire directement avec la valeur compteur dans la data -->
+            <!-- !! On peut écrire des expressions dans la syntaxe moustache, mais pas du JS directement (conditions etc) !! -->
+            <p>Compteur est égale à {{ compteur ? 'True' : 'False' }}</p>
+
+            <!-- Insert d'HTML -->
+            <div v-html="html"></div>
+
+            <!-- Méthode Computed -->
+            <p>{{ checkValue }}</p>
+            <p>{{ compteurA }}</p>
+            <button v-on:click="compteurA++">+</button>
+
+            <hr>
+
+            <!-- CSS -->
+            <div :class="[objCSS, toggleColor ? 'border' : '']"></div>
+            <button @click="toggleColor = !toggleColor">Change Color</button>
+
+            <p :style="style">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae, nisi!</p>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="./script.js"></script>
+    </body>
+</html>
